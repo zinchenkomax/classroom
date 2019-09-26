@@ -14,22 +14,22 @@ class Classroom
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    public $name;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    public $createdAt;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isActive;
+    public $isActive;
 
     public function getId(): ?int
     {
@@ -68,6 +68,20 @@ class Classroom
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * @param array $classroomIncoming
+     * @return $this
+     * thanksTo https://stackoverflow.com/a/46974441
+     */
+    public function assign(array $classroomIncoming): self {
+        foreach (get_object_vars($this) as $property => $default) {
+            if (!array_key_exists($property, $classroomIncoming)) continue;
+            $this->{$property} = $classroomIncoming[$property]; // assign value to object
+        }
 
         return $this;
     }
