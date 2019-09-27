@@ -104,7 +104,7 @@ class ClassroomController extends AbstractController
         $this->entityManager->persist($classroom);
         $this->entityManager->flush();
 
-        return $this->json(get_object_vars($classroom));
+        return $this->json($classroom);
     }
 
     /**
